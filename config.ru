@@ -3,6 +3,7 @@ Bundler.require
 module Ladtech
   module Clockon
     class App < Sinatra::Base
+      use Rack::CommonLogger
       set :client, OAuth2::Client.new('86H6oPNQlHUsghvZf9d_kw', '-OGzhLKvmkSsHoZBGYe7oA', :site => 'https://api.sandbox.freeagent.com', token_url: '/v2/token_endpoint', authorize_url: '/v2/approve_app')
 
       configure :development do

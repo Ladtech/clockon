@@ -1,5 +1,6 @@
 Given(/^I go to '(.*)'$/) do |uri|
-  HTTParty.get("http://localhost:9292#{uri}")
+  response = HTTParty.get("http://localhost:#{app_port}#{uri}")
+  fail "request failed" unless response.code == 200
 end
 
 Then(/^(.*) should be registered for (.*) in FreeAgent$/) do |name, date|

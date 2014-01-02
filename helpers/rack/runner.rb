@@ -1,9 +1,10 @@
 require 'childprocess'
+require 'tempfile'
 require 'wait'
 module Rack
   class Runner
 
-    attr_accessor :port
+    attr_accessor :port, :log
 
     def initialize config_ru, options={}
       @options= options
@@ -13,13 +14,15 @@ module Rack
     def run
       directory = ::File.dirname(@config_ru)
 
+      @log = Tempfile.new('application_log')
 
       @process = Dir.chdir directory do
         puts "bundle exec thin start -R #{::File.basename(@config_ru)} -p #{port} #{@options[:ssl] == true ? '--ssl' : '' }"
         command = "bundle exec thin start -R #{::File.basename(@config_ru)} -p #{port} #{@options[:ssl] == true ? '--ssl' : '' }".split
         process = ChildProcess.build(*command)
         process.detach=true
-        process.io.inherit!
+        process.io.stdout = @log
+        process.io.stderr = @log
         process.start
         Wait.new.until do
           !port_available?(port)

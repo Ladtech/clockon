@@ -12,4 +12,5 @@ group :development do
   gem 'sinatra-contrib', require: 'sinatra/reloader'
   gem 'page_magic'
   gem 'poltergeist'
+  gem 'thin'
 end
