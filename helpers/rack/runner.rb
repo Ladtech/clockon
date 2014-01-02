@@ -17,7 +17,6 @@ module Rack
       @log = Tempfile.new('application_log')
 
       @process = Dir.chdir directory do
-        puts "bundle exec thin start -R #{::File.basename(@config_ru)} -p #{port} #{@options[:ssl] == true ? '--ssl' : '' }"
         command = "bundle exec thin start -R #{::File.basename(@config_ru)} -p #{port} #{@options[:ssl] == true ? '--ssl' : '' }".split
         process = ChildProcess.build(*command)
         process.detach=true
@@ -41,7 +40,7 @@ module Rack
     end
 
     def port_available? port
-      `fuser -n tcp #{port}`.empty?
+      `fuser -n tcp #{port} 2>/dev/null`.empty?
     end
 
     def stop
