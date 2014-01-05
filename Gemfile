@@ -6,6 +6,7 @@ gem 'oauth2'
 group :test do
   gem 'cucumber', require: 'cucumber/rake/task'
   gem 'httparty'
+  gem 'rspec', require: 'rspec/core/rake_task'
 end
 
 group :development do
