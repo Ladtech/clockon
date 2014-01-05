@@ -11,7 +11,6 @@ module FreeAgent
 
             def authorize
               authorize_button.click
-              puts browser_element.driver.network_traffic.last.url
               browser_element.driver.network_traffic.last.url[/=(.*)&/, 1]
             end
           end

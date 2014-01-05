@@ -8,6 +8,8 @@ namespace :freeagent do
 
   FreeAgent::APPS.each do |name, keys|
     namespace name do
+
+      desc 'generate access token for application'
       task :generate_access_token do
         oauth2_client = FreeAgent.client(*keys)
         session = PageMagic.session(:poltergeist)
