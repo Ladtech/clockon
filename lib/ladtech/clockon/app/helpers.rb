@@ -3,7 +3,7 @@ module Ladtech
     module Helpers
       module User
         def user name
-          raise "implement me"
+          FreeAgent::User.find(name: name)
         end
       end
     end

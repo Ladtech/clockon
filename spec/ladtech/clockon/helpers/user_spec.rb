@@ -1,4 +1,7 @@
 require 'spec_helper'
+require 'ladtech/clockon/model/freeagent'
+require 'ladtech/clockon/app/helpers'
+
 
 describe Helpers::User do
   before :each do
@@ -7,6 +10,6 @@ describe Helpers::User do
   end
 
   it 'should fail' do
-    @object.user('leon').should == User.new
+    @object.user('leon').should == FreeAgent::User.new
   end
 end
